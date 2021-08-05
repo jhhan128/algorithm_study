@@ -1,3 +1,5 @@
+const int MAX = 1001;
+
 int board[MAX][MAX];
 int visited[MAX][MAX];
 int w, h;
