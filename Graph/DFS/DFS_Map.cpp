@@ -1,5 +1,7 @@
-int board[101][101];
-bool visited[101][101];
+const int MAX = 1001;
+
+int board[MAX][MAX];
+bool visited[MAX][MAX];
 int w, h;
 
 int dx[] = { 0, -1, 1, 0 };
