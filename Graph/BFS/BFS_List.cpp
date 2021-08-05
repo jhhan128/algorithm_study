@@ -1,5 +1,5 @@
-vector<int> adj[1001];
-bool visited[1001];
+vector<int> adj[MAX];
+bool visited[MAX];
 
 void bfs(int v) {
     queue<int> q;
