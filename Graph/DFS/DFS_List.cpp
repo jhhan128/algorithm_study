@@ -1,5 +1,7 @@
-vector<int> adj[1001];
-bool visited[1001];
+const int MAX = 1001;
+
+vector<int> adj[MAX];
+bool visited[MAX];
 
 void dfs(int v) {
     visited[v] = 1;
