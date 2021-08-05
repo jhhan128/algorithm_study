@@ -1,5 +1,5 @@
 int maps[1001][1001];
-int visited[1001];
+bool visited[1001];
 int n;
 
 void dfs(int v) {
