@@ -1,5 +1,5 @@
-int board[101][101];
-int visited[101][101];
+int board[MAX][MAX];
+int visited[MAX][MAX];
 int w, h;
 
 int dx[] = { 0, -1, 1, 0 };
