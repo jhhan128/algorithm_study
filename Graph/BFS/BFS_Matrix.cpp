@@ -1,5 +1,7 @@
-int adj[1001][1001];
-bool visited[1001];
+const int MAX = 1001;
+
+int adj[MAX][MAX];
+bool visited[MAX];
 int n;
 
 void bfs(int v) {
