@@ -1,3 +1,5 @@
+const int MAX = 1001;
+
 vector<int> adj[MAX];
 bool visited[MAX];
 
