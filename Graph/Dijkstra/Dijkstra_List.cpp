@@ -2,7 +2,7 @@ const int MAX = 20001;
 const int INF = 0x3f3f3f3f;
 
 vector<pair<int, int>> adj[MAX];
-int v, e, k, dist[MAX];
+int dist[MAX];
 
 void dijkstra(int v) {
     using pii = pair<int, int>;
