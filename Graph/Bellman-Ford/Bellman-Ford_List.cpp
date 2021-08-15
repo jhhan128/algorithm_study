@@ -17,7 +17,7 @@ bool bellmanFord(int v) {
                 int w = p.second;
 
                 if (dist[j] == INF) continue;
-                if (dist[nxt] > dist[j]+w) {
+                if (dist[nxt] > dist[j] + w) {
                     dist[nxt] = dist[j] + w;
                     if (i == n) hasMinusCycle = 1;
                 }
