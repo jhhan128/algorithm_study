@@ -10,7 +10,7 @@ void dijkstra(int v) {
     memset(dist, INF, sizeof(dist));
 
     dist[v] = 0;
-    pq.push({ 0, v });
+    pq.push(make_pair(0, v));
 
     while (!pq.empty()) {
         int c = pq.top().first;
@@ -24,7 +24,7 @@ void dijkstra(int v) {
 
             if (dist[nn] > nc) {
                 dist[nn] = nc;
-                pq.push({ nc, nn });
+                pq.push(make_pair(nc, nn));
             }
         }
     }
