@@ -1,3 +1,5 @@
+// 역추적: http://boj.kr/c1d855b83458461381de180677f4b4c0
+
 const int MAX = 20001;
 const int INF = 0x3f3f3f3f;
 
