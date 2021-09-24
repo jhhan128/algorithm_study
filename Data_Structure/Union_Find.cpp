@@ -2,7 +2,7 @@ struct UnionFind {
     vector<int> par;
 
     void init(int n) {
-        par.resize(n+3);
+        par.resize(n+1);
 
         for (int i = 0; i <= n; i++) {
             par[i] = -1;
