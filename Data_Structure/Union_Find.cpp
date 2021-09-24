@@ -17,8 +17,6 @@ struct UnionFind {
     void merge(int u, int v) {
         u = find(u), v = find(v);
         if (u == v) return;
-
-        if (par[v] > par[u]) swap(u, v);
         par[u] += par[v];
         par[v] = u;
     }
