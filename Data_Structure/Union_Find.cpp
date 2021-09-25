@@ -1,12 +1,9 @@
 struct UnionFind {
     vector<int> par;
 
-    void init(int n) {
-        par.resize(n+1);
-
-        for (int i = 0; i <= n; i++) {
-            par[i] = -1;
-        }
+    void init(int sz) {
+        par.resize(sz + 1);
+        fill(par.begin(), par.end(), -1);
     }
 
     int find(int v) {
@@ -14,11 +11,11 @@ struct UnionFind {
         return par[v] = find(par[v]);
     }
 
-    void merge(int u, int v) {
-        u = find(u), v = find(v);
-        if (u == v) return;
-        par[u] += par[v];
-        par[v] = u;
+    void merge(int a, int b) {
+        a = find(a), b = find(b);
+        if (a == b) return;
+        if (par[a] > par[b]) swap(a, b);
+        par[a] += par[b], par[b] = a;
     }
 
     int size(int v) {
