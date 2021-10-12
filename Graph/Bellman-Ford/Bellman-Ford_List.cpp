@@ -1,5 +1,5 @@
 const int MAX = 501;
-const ll INF = 0x3f3f3f3f3f3f3f3f;
+const ll INF = 0x3f3f3f3f3f3f3f3fLL;
 
 vector<pair<int, int>> adj[MAX];
 ll dist[MAX];
