@@ -19,12 +19,12 @@ struct bigint {
     }
 
     bigint(): sign(1) {}
-    bigint(long long v) { *this = v; }
+    bigint(ll v) { *this = v; }
     bigint(const string &s) { read(s); }
     bigint(const char *s) { string temp = s; read(temp); }
 
     void operator = (const bigint &v) { sign = v.sign, a = v.a; }
-    void operator = (long long v) {
+    void operator = (ll v) {
         sign = 1, a.clear();
         if (v < 0) sign = -1, v = -v;
         for (; v > 0; v = v / (int)1e9) 
@@ -62,24 +62,24 @@ struct bigint {
         if (v < 0) sign = -sign, v = -v;
         for (int i = 0, carry = 0; i < (int)a.size() || carry; i++) {
             if (i == (int)a.size()) a.push_back(0);
-            long long cur = a[i] * (long long)v + carry;
+            ll cur = a[i] * (ll)v + carry;
             carry = (int)(cur / (int)1e9);
             a[i] = (int)(cur % (int)1e9);
         } trim();
     }
 
     bigint operator * (int v) const { bigint res = *this; res *= v; return res; }
-    void operator *= (long long v) {
+    void operator *= (ll v) {
         if (v < 0) sign = -sign, v = -v;
         for (int i = 0, carry = 0; i < (int)a.size() || carry; i++) {
             if (i == (int)a.size()) a.push_back(0);
-            long long cur = a[i] * (long long)v + carry;
+            ll cur = a[i] * (ll)v + carry;
             carry = (int)(cur / (int)1e9);
             a[i] = (int)(cur % (int)1e9);
         } trim();
     }
  
-    bigint operator * (long long v) const { bigint res = *this; res *= v; return res; }
+    bigint operator * (ll v) const { bigint res = *this; res *= v; return res; }
     friend pair<bigint, bigint> divmod(const bigint &a1, const bigint &b1) {
         int norm = (int)1e9 / (b1.a.back() + 1);
         bigint a = a1.abs() * norm;
@@ -90,7 +90,7 @@ struct bigint {
             r *= (int)1e9, r += a.a[i];
             int s1 = r.a.size() <= b.a.size() ? 0 : r.a[b.a.size()];
             int s2 = r.a.size() <= b.a.size() - 1 ? 0 : r.a[b.a.size() - 1];
-            int d = ((long long)1e9 * s1 + s2) / b.a.back(); r -= b * d;
+            int d = ((ll)1e9 * s1 + s2) / b.a.back(); r -= b * d;
             while (r < (bigint)"0") r += b, --d; q.a[i] = d;
         }
         q.sign = a1.sign * b1.sign, r.sign = a1.sign;
@@ -103,7 +103,7 @@ struct bigint {
     void operator /= (int v) {
         if (v < 0) sign = -sign, v = -v;
         for (int i = (int)a.size() - 1, rem = 0; i >= 0; --i) {
-            long long cur = a[i] + rem * (long long)1e9;
+            ll cur = a[i] + rem * (ll)1e9;
             a[i] = (int)(cur / v);
             rem = (int)(cur % v);
         }
@@ -115,7 +115,7 @@ struct bigint {
         if (v < 0) v = -v;
         int m = 0;
         for (int i = a.size() - 1; i >= 0; --i)
-            m = (a[i] + m * (long long)1e9) % v;
+            m = (a[i] + m * (ll)1e9) % v;
         return m * sign;
     }
 
@@ -158,8 +158,8 @@ struct bigint {
         return res;
     }
 
-    long long longValue() const {
-        long long res = 0;
+    ll longValue() const {
+        ll res = 0;
         for (int i = a.size() - 1; i >= 0; i--)
             res = res * (int)1e9 + a[i];
         return res * sign;
@@ -192,11 +192,11 @@ struct bigint {
     }
  
     static vector<int> cb(const vector<int> &a, int old_digits, int new_digits) {
-        vector<long long> p(max(old_digits, new_digits) + 1);
+        vector<ll> p(max(old_digits, new_digits) + 1);
         p[0] = 1;
         for (int i = 1; i < (int)p.size(); i++) p[i] = p[i - 1] * 10;
         vector<int> res;
-        long long cur = 0;
+        ll cur = 0;
         int cur_digits = 0;
         for (int i = 0; i < (int)a.size(); i++) {
             cur += a[i] * p[cur_digits];
@@ -212,9 +212,9 @@ struct bigint {
         return res;
     } 
 
-    static vector<long long> multiply(const vector<long long> &a, const vector<long long> &b) {
+    static vector<ll> multiply(const vector<ll> &a, const vector<ll> &b) {
         int n = a.size();
-        vector<long long> res(n + n);
+        vector<ll> res(n + n);
         if (n <= 32) {
             for (int i = 0; i < n; i++)
                 for (int j = 0; j < n; j++)
@@ -223,16 +223,16 @@ struct bigint {
         }
  
         int k = n >> 1;
-        vector<long long> a1(a.begin(), a.begin() + k);
-        vector<long long> a2(a.begin() + k, a.end());
-        vector<long long> b1(b.begin(), b.begin() + k);
-        vector<long long> b2(b.begin() + k, b.end());
-        vector<long long> a1b1 = multiply(a1, b1);
-        vector<long long> a2b2 = multiply(a2, b2);
+        vector<ll> a1(a.begin(), a.begin() + k);
+        vector<ll> a2(a.begin() + k, a.end());
+        vector<ll> b1(b.begin(), b.begin() + k);
+        vector<ll> b2(b.begin() + k, b.end());
+        vector<ll> a1b1 = multiply(a1, b1);
+        vector<ll> a2b2 = multiply(a2, b2);
 
         for (int i = 0; i < k; i++) a2[i] += a1[i];
         for (int i = 0; i < k; i++) b2[i] += b1[i];
-        vector<long long> r = multiply(a2, b2);
+        vector<ll> r = multiply(a2, b2);
 
         for (int i = 0; i < (int)a1b1.size(); i++) r[i] -= a1b1[i];
         for (int i = 0; i < (int)a2b2.size(); i++) r[i] -= a2b2[i];
@@ -246,18 +246,18 @@ struct bigint {
     bigint operator * (const bigint &v) const {
         vector<int> a6 = cb(this->a, 9, 6);
         vector<int> b6 = cb(v.a, 9, 6);
-        vector<long long> a(a6.begin(), a6.end());
-        vector<long long> b(b6.begin(), b6.end());
+        vector<ll> a(a6.begin(), a6.end());
+        vector<ll> b(b6.begin(), b6.end());
 
         while (a.size() < b.size()) a.push_back(0);
         while (b.size() < a.size()) b.push_back(0);
         while (a.size() & (a.size() - 1)) a.push_back(0), b.push_back(0);
 
-        vector<long long> c = multiply(a, b);
+        vector<ll> c = multiply(a, b);
         bigint res;
         res.sign = sign * v.sign;
         for (int i = 0, carry = 0; i < (int)c.size(); i++) {
-            long long cur = c[i] + carry;
+            ll cur = c[i] + carry;
             res.a.push_back((int)(cur % (int)1e6));
             carry = (int)(cur / (int)1e6);
         }
